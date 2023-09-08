@@ -1,3 +1,4 @@
+A Simple Mod adding QoL to Elytra flight
 
 • Slow down when flying with elytras by pressing the Sneak key. This also stops any active rocket propusion active.
 
