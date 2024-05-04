@@ -1,6 +1,6 @@
 package net.bl4st.elytradrag;
 
-import net.bl4st.config.ModConfigs;
+import net.bl4st.config.ModConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.server.MinecraftServer;
@@ -12,7 +12,7 @@ public class ElytraDrag implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ModConfigs.registerConfigs();
+		ModConfig.LoadConfig();
 		ServerTickEvents.END_SERVER_TICK.register(this::ElytraDragTick);
 	}
 
@@ -28,9 +28,9 @@ public class ElytraDrag implements ModInitializer {
 				spe.getJumpBoostVelocityModifier();
 				var playerVelocity = spe.getVelocity();
 				var playerSpeed = playerVelocity.length() * 20.0f;
-				if(playerSpeed > ModConfigs.MINIMUM_SPEED)
+				if(playerSpeed > ModConfig.MINIMUM_SPEED)
 				{
-					var newVelocity = playerVelocity.multiply(1.0f - 0.05f * ModConfigs.ELYTRA_DRAG);
+					var newVelocity = playerVelocity.multiply(1.0f - 0.05f * ModConfig.ELYTRA_DRAG);
 					spe.setVelocity(newVelocity);
 					spe.velocityModified = true;
 				}
@@ -48,9 +48,9 @@ public class ElytraDrag implements ModInitializer {
 	{
 		if (player.getVelocity().getY() > -1.0f && player.fallDistance > 1.0f)
 			player.fallDistance = 1.0f;
-		else if(player.fallDistance > ModConfigs.MAXIMUM_FALLDISTANCE)
+		else if(player.fallDistance > ModConfig.MAXIMUM_FALLDISTANCE)
 		{
-			player.fallDistance = ModConfigs.MAXIMUM_FALLDISTANCE;
+			player.fallDistance = ModConfig.MAXIMUM_FALLDISTANCE;
 		}
 	}
 }
